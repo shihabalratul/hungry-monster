@@ -6,23 +6,53 @@ for (let i = 0; i <= 7; i++) {
 		.then(res => res.json())
 		.then(data => {
 			const array = data.meals[0];
-			const menu = document.getElementById("menu");
-			const menuDiv = document.createElement("div");
-			menuDiv.classList="p-4 bg-light meal-radius meal"
-			// menuDiv.addEventListener("click",function(){
-			// 	mealDetails('${array.idMeal}')
-			// })
-			const mealInfo = `
+			createElement(array);
+		})
+}
+function createElement(array) {
+	
+	const menu = document.getElementById("menu");
+	const menuDiv = document.createElement("div");
+	menuDiv.className = "p-4 bg-light meal-radius meal"
+	menuDiv.addEventListener("click", function () {
+		mealDetails('${array.idMeal}')
+	})
+	const mealInfo = `
 			<img class="w-100 meal-radius" src=${array.strMealThumb}>
 			<p class="d-flex justify-content-center pt-2 fw-bold">${array.strMeal}</p>
 			
 		`
-			menuDiv.innerHTML = mealInfo;
-			menu.appendChild(menuDiv);
+	menuDiv.innerHTML = mealInfo;
+	menu.appendChild(menuDiv);
+}
+function search() {
+	const contentBody = document.getElementById('menu');
+	const meal = document.getElementsByClassName("meal");
+	contentBody.innerHTML = ''
+	const inputKeyword = document.getElementById('search-input').value;
+	console.log(inputKeyword)
+	const notFound = document.getElementById('not-found');
 
-			// randomMeal(array);
+	if(inputKeyword == false){
 
-		})
+		notFound.innerHTML = `
+		<h1 class="d-flex justify-content-center mt-5 pt-5">Sorry no result found</h1>
+		`
+	}
+	else{
+		notFound.innerHTML = ''
+		const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s='
+		fetch(url + inputKeyword)
+			.then(res => res.json())
+			.then(data => {
+				data.meals.forEach(element => {
+					createElement(element);
+				});
+				
+			})
+	}
+	
+
 }
 
 // const mealDetails = id => {
@@ -40,32 +70,9 @@ for (let i = 0; i <= 7; i++) {
 // 			`
 // 		}
 // 		})
+
+
+
 // }
 
 
-// function mealDetails(){
-// 	let meal = document.getElementsByClassName("meal");
-// 	document.getElementById("menu").addEventListener("click", e=>{
-// 		if(e.target.matches(meal)){
-// 			document
-// 		}
-// 	})
-	
-	
-// }
-// function randomMeal(array) {
-// 	// for(let i=0; i<=8; i++){
-// 	console.log(array)
-// 	const menu = document.getElementById("menu");
-// 	const menuDiv = document.createElement("div");
-// 	menuDiv.className = 'd-flex';
-// 	const mealInfo = `
-// 			<div class="meals p-3 bg-light ">
-// 			<img class="img-thumbnail rounded" src=${array.strMealThumb}>
-// 			<p>${array.strMeal}</p>
-// 			</div>
-// 		`
-// 	menuDiv.innerHTML = mealInfo;
-// 	menu.appendChild(menuDiv);
-// 	// }
-// }

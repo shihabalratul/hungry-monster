@@ -34,15 +34,16 @@
 			<nav class="navbar navbar-light mt-3">
 				<div class="container-fluid d-flex justify-content-center">
 					<form class="d-flex">
-						<input class="form-control me-2" type="search" placeholder="Search for meal"
+						<input id="search-input" class="form-control me-2" type="search" placeholder="Search for meal"
 							aria-label="Search">
-						<button class="btn btn-danger" type="submit">Search</button>
+						<button onclick="search()" class="btn btn-danger" type="submit">Search</button>
 					</form>
 				</div>
 			</nav>
 		</heading>
 
 		<section id="content-body">
+			<div id="not-found"></div>
 			<div id="menu">
 
 			</div>

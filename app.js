@@ -15,7 +15,7 @@ function createElement(array) {
 	const menuDiv = document.createElement("div");
 	menuDiv.className = "p-4 bg-light meal-radius meal"
 	menuDiv.addEventListener("click", function () {
-		mealDetails('${array.idMeal}')
+		mealDetails(array)
 	})
 	const mealInfo = `
 			<img class="w-100 meal-radius" src=${array.strMealThumb}>
@@ -26,9 +26,7 @@ function createElement(array) {
 	menu.appendChild(menuDiv);
 }
 function search() {
-	const contentBody = document.getElementById('menu');
-	const meal = document.getElementsByClassName("meal");
-	contentBody.innerHTML = ''
+	removeContent();
 	const inputKeyword = document.getElementById('search-input').value;
 	console.log(inputKeyword)
 	const notFound = document.getElementById('not-found');
@@ -45,7 +43,7 @@ function search() {
 		fetch(url + inputKeyword)
 			.then(res => res.json())
 			.then(data => {
-				data.meals.forEach(element => {
+				data.forEach(element => {
 					createElement(element);
 				});
 				
@@ -55,24 +53,26 @@ function search() {
 
 }
 
-// const mealDetails = id => {
-// 	console.log(menu);
-// 	const contentBody = document.getElementById('content-body');
-// 	console.log(array);
-// 	contentBody.removeChild(menu);
-// 		fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id)
-// 		.then(res => res.json())
-// 		.then(data => {
-// 			for(let i=1; i<=20;i++){
-// 			const array = data.meals[0];
-// 			const mealDetail = `
-// 			<img class="w-75 meal-radius" src=${array.strMealThumb}>
-// 			`
-// 		}
-// 		})
+function mealDetails(array){
+	removeContent();
+	const mealDetails= document.getElementById("mealDetail");
+		const ingredientsDiv=document.createElement("div")
+		const ingredients=`
+		<img src='${array.strMealThumb}' class="image-align d-block mx-auto meal-radius mt-4">
+		<p>${array.strMeasure1} ${array.strIngredient1}</p>
+		<p>${array.strMeasure2} ${array.strIngredient2}</p>
+		<p>${array.strMeasure3} ${array.strIngredient3}</p>
+		<p>${array.strMeasure4} ${array.strIngredient4}</p>
+		<p>${array.strMeasure5} ${array.strIngredient5}</p>
+		<p>${array.strMeasure6} ${array.strIngredient6}</p>
+		`
+		ingredientsDiv.innerHTML=ingredients;
+		mealDetails.appendChild(ingredientsDiv);
 
-
-
-// }
-
+}
+function removeContent(){
+	const contentBody = document.getElementById('menu');
+	const meal = document.getElementsByClassName("meal");
+	contentBody.innerHTML = '';
+}
 

@@ -1,3 +1,4 @@
+// FETCH DATA BY ID
 for (let i = 0; i <= 7; i++) {
 	let id = 52770 + i;
 	console.log(id);
@@ -9,6 +10,8 @@ for (let i = 0; i <= 7; i++) {
 			createElement(array);
 		})
 }
+
+// CREATE NEW ELEMENT
 function createElement(array) {
 	
 	const menu = document.getElementById("menu");
@@ -25,6 +28,8 @@ function createElement(array) {
 	menuDiv.innerHTML = mealInfo;
 	menu.appendChild(menuDiv);
 }
+
+// SEARCH FOR MEAL
 function search() {
 	removeContent();
 	const inputKeyword = document.getElementById('search-input').value;
@@ -53,23 +58,31 @@ function search() {
 
 }
 
+// SHOW MEAL DETAILS AND INGREDIENT
 function mealDetails(array){
 	removeContent();
 	const mealDetails= document.getElementById("mealDetail");
 		const ingredientsDiv=document.createElement("div")
+		ingredientsDiv.className ="text-align"
 		const ingredients=`
-		<img src='${array.strMealThumb}' class="image-align d-block mx-auto meal-radius mt-4">
-		<p>${array.strMeasure1} ${array.strIngredient1}</p>
-		<p>${array.strMeasure2} ${array.strIngredient2}</p>
-		<p>${array.strMeasure3} ${array.strIngredient3}</p>
-		<p>${array.strMeasure4} ${array.strIngredient4}</p>
-		<p>${array.strMeasure5} ${array.strIngredient5}</p>
-		<p>${array.strMeasure6} ${array.strIngredient6}</p>
+		<img src='${array.strMealThumb}' class="image-align d-block mx-auto meal-radius my-3">
+		<h2>${array.strMeal}</h2>
+		<h4>Ingredients</h4>
+		<ul>
+		<li>${array.strMeasure1} ${array.strIngredient1}</li>
+		<li>${array.strMeasure2} ${array.strIngredient2}</li>
+		<li>${array.strMeasure3} ${array.strIngredient3}</li>
+		<li>${array.strMeasure4} ${array.strIngredient4}</li>
+		<li>${array.strMeasure5} ${array.strIngredient5}</li>
+		<li>${array.strMeasure6} ${array.strIngredient6}</li>
+		</ul>
 		`
 		ingredientsDiv.innerHTML=ingredients;
 		mealDetails.appendChild(ingredientsDiv);
 
 }
+
+//REMOVE HOME PAGE CONTENTS
 function removeContent(){
 	const contentBody = document.getElementById('menu');
 	const meal = document.getElementsByClassName("meal");

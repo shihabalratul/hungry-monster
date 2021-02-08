@@ -1,0 +1,15 @@
+body {
+	padding: 0 30px; 
+}
+
+/* .meals {
+	width:400px;
+
+} */
+#menu {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);	
+}
+.meal-radius {
+	border-radius: 10px;
+}
